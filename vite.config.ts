@@ -1,32 +1,23 @@
-import { defineConfig } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
-import { tailwindcss } from './tailwind.config.cjs'
-import { postcss } from './postcss.config.cjs'
-import autoprefixer from 'autoprefixer'
+import devtoolsJson from 'vite-plugin-devtools-json'; // Used for integration with Chrome DevTools
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    postcss,
-    svelte(),
-    tailwindcss,
-    autoprefixer,
-  ], 
-  build: {
-    outDir: 'output',
-    assetsDir: 'static', 
-    rollupOptions: {
-      output: {
-        assetFileNames: (assetInfo) => {
-          let extType = assetInfo.name.split('.')[1];
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            extType = 'images';
-          }
-          return `static/${extType}/[name]-[hash][extname]`;
-        },
-        chunkFileNames: 'static/js/[name]-[hash].js',
-        entryFileNames: 'static/js/[name]-[hash].js',
-      },
-    },
-  },
-})
+export default defineConfig(({ mode }) => {
+	return {
+		plugins: [
+			devtoolsJson(),
+			sveltekit()
+		],
+		esbuild: {
+			pure: mode === 'production' ? ['console.debug'] : []
+			// In production mode, this strips console.debug lines from the entire application
+			// console.log is not stripped and can be used to show info in production
+			// Source: https://github.com/vitejs/vite/discussions/7920
+		},
+		css: {
+			preprocessorOptions: {
+				scss: {}
+			}
+		}
+	}	
+});
