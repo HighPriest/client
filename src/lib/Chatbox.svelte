@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { chatState, chatConfig } from '$lib/state.svelte';
-	import { websocketService } from '$lib/websocket.service.ts';
+	import { websocketService } from '$lib/websocket.service.js';
 
     import Header from '$lib/Chatbox/Header.svelte';
 	import Session from '$lib/Chatbox/Session.svelte';

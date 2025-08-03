@@ -4,10 +4,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(({ mode }) => {
 	return {
-		plugins: [
-			devtoolsJson(),
-			sveltekit()
-		],
+		plugins: [devtoolsJson(), sveltekit()],
 		esbuild: {
 			pure: mode === 'production' ? ['console.debug'] : []
 			// In production mode, this strips console.debug lines from the entire application
@@ -18,6 +15,6 @@ export default defineConfig(({ mode }) => {
 			preprocessorOptions: {
 				scss: {}
 			}
-		}
-	}	
+		},
+	};
 });
