@@ -2,6 +2,8 @@ import devtoolsJson from 'vite-plugin-devtools-json'; // Used for integration wi
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
+import path from 'path';
+
 export default defineConfig(({ mode }) => {
 	return {
 		plugins: [devtoolsJson(), sveltekit()],
@@ -15,6 +17,11 @@ export default defineConfig(({ mode }) => {
 			preprocessorOptions: {
 				scss: {}
 			}
+		},
+		resolve: {
+    		alias: {
+				'$lib': path.resolve(__dirname,'./src/lib' ),
+			},
 		},
 	};
 });
