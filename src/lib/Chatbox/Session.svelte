@@ -76,7 +76,10 @@
   The form submission is handled by the on:submit event on the <form> element.
 -->
 <div class="chat-sessionform">
-	<form onsubmit={handleSessionRequest}>
+	<form onsubmit={((event) => {
+		event.preventDefault();
+		handleSessionRequest;
+	})}>
 		<fieldset disabled={isLoading}>
 			<legend>Start a new chat</legend>
 			<p>Please fill in your details to begin.</p>
