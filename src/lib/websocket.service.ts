@@ -25,7 +25,7 @@ function connect() {
 		console.debug('WebSocket connection established.');
 		// Send initial greeting from the bot upon connection
 		if (chatConfig.greeting) {
-			chatState.messenger.push({ author: 0, body: chatConfig.greeting });
+			chatState.messenger.push({ author: "0", body: chatConfig.greeting });
 		}
 	};
 
@@ -48,7 +48,7 @@ function connect() {
 
 	ws.onerror = (event) => {
 		console.error('WebSocket error:', event);
-        chatState.messenger.push({author: 0, body: "There has been an error with creating WebSocket connection!"});
+        chatState.messenger.push({author: "0", body: "There has been an error with creating WebSocket connection!"});
 	};
 
 	ws.onclose = () => {
@@ -63,7 +63,7 @@ function connect() {
  */
 function sendMessage(body: string) {
 	if (ws && ws.readyState === WebSocket.OPEN) {
-		const message: Message = { author: 1, body }; // Author 1 is the user
+		const message: Message = { author: "1", body }; // Author 1 is the user
 
 		// Add the user's message to the state immediately for a snappy UI
 		chatState.messenger.push(message);

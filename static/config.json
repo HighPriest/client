@@ -9,7 +9,7 @@
             "proto": "wss",
             "host": "localhost", 
             "port": 8000
-        }
-    }, 
-    "greeting": "Hello there, thanks for reaching out, i'll answer you asap"
+        },
+        "greeting": "Hello there, thanks for reaching out, i'll answer you asap"
+    }
 }

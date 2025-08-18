@@ -6,12 +6,12 @@
 	// We derive a clustered view from the flat message list.
 	// This code runs automatically whenever `chatState.messenger` changes.
 	const messageClusters = $derived.by(() => {
-		if (!chatState.messenger.length) {
+		if (chatState.messenger.length === 0) {
 			return [];
 		}
 
 		// This is the new structure we are creating.
-		const clusters: { author: number; messages: string[] }[] = [];
+		const clusters: { author: string; messages: string[] }[] = [];
 
 		// Start the first cluster.
 		let currentCluster = {
@@ -60,7 +60,7 @@
 		<!-- The main loop now iterates over our clean, clustered data -->
 		{#each messageClusters as cluster (cluster.author + cluster.messages[0])}
 			<!-- We check the author to determine the layout -->
-			{#if cluster.author === 0}
+			{#if cluster.author === "0"}
 				<!-- BOT MESSAGES -->
 				<div class="chat-cluster">
 					<div class="chat-avatar">

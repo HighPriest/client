@@ -1,5 +1,5 @@
 export type Message = {
-    author: number,
+    author: string,
     body: string
 }
 export type Config = {
