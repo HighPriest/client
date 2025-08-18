@@ -31,23 +31,21 @@
 		}
 
 		// Construct the server URL from the imported config.
-        const { proto, host, port } = chatConfig.server;
-        const url = port && port !== 0
-            ? `${proto}://${host}:${port}/session`
-            : `${proto}://${host}/session`;
+		const { proto, host, port } = chatConfig.server;
+		const url =
+			port && port !== 0 ? `${proto}://${host}:${port}/session` : `${proto}://${host}/session`;
 
 		// Create the request body.
 		const formBody = Object.entries(postData)
 			.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
 			.join('&');
 
+		console.debug('Session request body:', formBody);
 		try {
 			const response = await fetch(url, {
 				method: 'POST',
-				// Note: 'no-cors' mode will result in an opaque response, meaning you can't
-				// access status, headers, or the body. You might need to configure
-				// CORS on your server for a real application.
 				mode: 'no-cors',
+				credentials: 'include',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				},
@@ -76,77 +74,242 @@
   The form submission is handled by the on:submit event on the <form> element.
 -->
 <div class="chat-sessionform">
-	<form onsubmit={((event) => {
-		event.preventDefault();
-		handleSessionRequest;
-	})}>
+	<form
+		onsubmit={(event) => {
+			event.preventDefault();
+			handleSessionRequest();
+		}}
+	>
 		<fieldset disabled={isLoading}>
 			<legend>Start a new chat</legend>
 			<p>Please fill in your details to begin.</p>
 
-			<label for="name">Name*</label>
-			<input
-				type="text"
-				id="name"
-				name="name"
-				placeholder="Your Name"
-				bind:value={postData.name}
-				required
-			/>
+			<div class="form-input">
+				<input
+					type="text"
+					id="name"
+					name="name"
+					placeholder=""
+					bind:value={postData.name}
+					required
+				/>
+				<label for="name">Your Name</label>
+			</div>
 
-			<label for="surname">Surname</label>
-			<input
-				type="text"
-				id="surname"
-				name="surname"
-				placeholder="Your Surname"
-				bind:value={postData.surname}
-			/>
+			<div class="form-input">
+				<input
+					type="text"
+					id="surname"
+					name="surname"
+					placeholder=""
+					bind:value={postData.surname}
+				/>
+				<label for="surname">Phone Number*</label>
+			</div>
 
-			<label for="email">Email*</label>
-			<input
-				type="email"
-				id="email"
-				name="email"
-				placeholder="your@email.com"
-				bind:value={postData.email}
-				required
-			/>
+			<div class="form-input">
+				<input
+					type="email"
+					id="email"
+					name="email"
+					bind:value={postData.email}
+					placeholder=""
+					required
+				/>
+				<label for="email">E-mail address</label>
+			</div>
 
-			<button type="submit" aria-busy={isLoading}>
-				{#if isLoading}Starting...{:else}Open Chat{/if}
+			<button class="button-82-pushable" type="submit" aria-busy={isLoading}>
+				<span class="button-82-shadow"></span>
+				<span class="button-82-edge"></span>
+				<span class="button-82-front text"> {#if isLoading}Starting...{:else}Open Chat{/if} </span>
 			</button>
 		</fieldset>
 	</form>
-    {#if errorMessage}
-        <p class="error-message" role="alert">{errorMessage}</p>
-    {/if}
+	{#if errorMessage}
+		<p class="error-message" role="alert">{errorMessage}</p>
+	{/if}
 </div>
+<!-- HTML !-->
 
-<style>
+<style lang="scss">
 	.chat-sessionform {
-        position: relative;
-		padding: 1.5rem;
+		/* 		position: relative;
+		padding: 1.5em;
 		border: 1px solid var(--pico-form-element-border-color);
 		border-radius: var(--pico-border-radius);
-		background-color: var(--pico-card-background-color);
+		background-color: var(--pico-card-background-color); */
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 3em 1em 0.5em 1em;
+		color: white;
+
+		form {
+			margin: 12px 0;
+			overflow: hidden;
+			padding: 0.1em;
+			position: relative;
+			border-radius: 1em;
+			fieldset {
+				border-radius: 1em;
+				position: relative;
+				margin-top: -0.3em;
+				background: hsl(0deg 0% 0% / 0.8);
+				legend {
+					font-weight: bold;
+					font-size: 1.2em;
+					text-shadow: -0.05em -0.1em black;
+				}
+			}
+			button {
+				&.button-82-pushable {
+					position: relative;
+					border: none;
+					background: transparent;
+					padding: 0;
+					cursor: pointer;
+					outline-offset: 4px;
+					transition: filter 250ms;
+					user-select: none;
+					-webkit-user-select: none;
+					touch-action: manipulation;
+				}
+
+				.button-82-shadow {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					border-radius: 12px;
+					background: hsl(0deg 0% 0% / 0.25);
+					will-change: transform;
+					transform: translateY(2px);
+					transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+				}
+
+				.button-82-edge {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					border-radius: 12px;
+					background: linear-gradient(
+						to left,
+						hsl(from var(--chat-ui_theme) h s l / 16%) 0%,
+						hsl(from var(--chat-ui_theme) h s l / 32%) 8%,
+						hsl(from var(--chat-ui_theme) h s l / 32%) 92%,
+						hsl(from var(--chat-ui_theme) h s l / 32%) 100%
+					);
+				}
+
+				.button-82-front {
+					display: block;
+					position: relative;
+					padding: 12px 27px;
+					border-radius: 12px;
+					font-size: 1.1rem;
+					color: white;
+					background: var(--chat-ui_theme);
+					will-change: transform;
+					transform: translateY(-4px);
+					transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+				}
+
+/* 				@media (min-width: 768px) {
+					.button-82-front {
+						font-size: 1.25rem;
+						padding: 12px 42px;
+					}
+				} */
+
+				&.button-82-pushable:hover {
+					filter: brightness(110%);
+					-webkit-filter: brightness(110%);
+				}
+
+				&.button-82-pushable:hover .button-82-front {
+					transform: translateY(-6px);
+					transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+				}
+
+				&.button-82-pushable:active .button-82-front {
+					transform: translateY(-2px);
+					transition: transform 34ms;
+				}
+
+				&.button-82-pushable:hover .button-82-shadow {
+					transform: translateY(4px);
+					transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+				}
+
+				&.button-82-pushable:active .button-82-shadow {
+					transform: translateY(1px);
+					transition: transform 34ms;
+				}
+
+				&.button-82-pushable:focus:not(:focus-visible) {
+					outline: none;
+				}
+			}
+			.form-input {
+				position: relative;
+				input {
+					width: 100%;
+					padding: 10px 0;
+					font-size: 16px;
+					color: var(--chat-ui_theme_text-color);
+					margin-bottom: 30px;
+					border: none;
+					border-bottom: 1px solid #fff;
+					outline: none;
+					background: transparent;
+					&:not(:placeholder-shown),
+					&:focus {
+						~ label {
+							top: -20px;
+							left: 0;
+							font-size: 12px;
+						}
+						&:invalid {
+							~ label {
+								color: crimson;
+							}
+						}
+					}
+					&:valid {
+						~ label {
+							color: gray;
+						}
+					}
+				}
+				label {
+					position: absolute;
+					top: 0;
+					left: 0;
+					padding: 10px 0;
+					font-size: 16px;
+					color: gray;
+					pointer-events: none;
+					transition: 0.5s;
+				}
+			}
+		}
 	}
 
-	legend {
-		font-weight: bold;
-		font-size: 1.2rem;
-	}
-	
 	.error-message {
 		color: var(--pico-color-red-500);
-		font-size: 0.9rem;
-		margin-top: 1rem;
-        position: absolute;
-        bottom: 0;
+		font-size: 0.9em;
+		margin-top: 1em;
+		position: absolute;
+		bottom: 0;
 	}
 
-    /* Add a little spacing between form elements */
-    label {
-        margin-top: 0.5rem;
-    }
+	/* Add a little spacing between form elements */
+	label {
+		margin-top: 0.5em;
+	}
 </style>
