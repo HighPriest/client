@@ -1,5 +1,5 @@
-import { autoEmbedOnBody } from 'svelte-standalone'
+import { autoEmbedWithTarget } from 'svelte-standalone'
 
 import Livematrix from './index.svelte'
 
-autoEmbedOnBody(Livematrix, 'livematrix')
+autoEmbedWithTarget(Livematrix, 'livematrix')
