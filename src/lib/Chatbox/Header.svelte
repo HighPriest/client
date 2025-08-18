@@ -20,7 +20,7 @@
   color: var(--chat-ui_theme_text-color, white);
   box-shadow: 0 0.1rem 1rem hsla(0, 0%, 0%, .4);
   overflow: hidden;
-  padding: .5rem 1rem;
+  padding: .5em 1em;
   position: absolute;
   top: 0;
   left: 0;
@@ -30,7 +30,7 @@
   transition: transform 0.15s var(--chat-ui_easing-quick);
   
   & > h5 {
-    font-size: 1rem;
+    font-size: 1em;
     font-weight: normal;
     line-height: 1.1;
     flex: 2;
@@ -39,8 +39,8 @@
 }
 
 .chat-avatar {
-  width: 2rem;
-  height: 2rem;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
   margin: 0;
   overflow: hidden;

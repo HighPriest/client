@@ -95,8 +95,8 @@
 <style lang="scss">
 	/* Your existing SCSS styles remain unchanged as they are well-structured */
 	.chat-avatar {
-		width: 2rem;
-		height: 2rem;
+		width: 2em;
+		height: 2em;
 		border-radius: 50%;
 		margin: 0;
 		overflow: hidden;
@@ -129,25 +129,25 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  padding-block: 4rem;
+  padding-block: 4em;
   min-height: 100%;
   
   & > .chat-cluster:last-child {
     scroll-snap-align: end;
-    scroll-margin-block-end: 5rem;
+    scroll-margin-block-end: 5em;
   }
 }
 
 .chat-cluster {
-  margin: 0.25rem 3rem 0.75rem 0.5rem;
+  margin: 0.25em 3em 0.75em 0.5em;
   display: flex;
   flex-wrap: wrap;
   align-self: flex-start;
   align-items: flex-end;
   
   &[mine] {
-    margin-left: 3rem;
-    margin-right: 0.5rem;
+    margin-left: 3em;
+    margin-right: 0.5em;
     align-self: flex-end;
     
     & > section {
@@ -156,8 +156,8 @@
   }
   
   & > .chat-avatar {
-    margin-right: 0.5rem;
-    bottom: 1rem;
+    margin-right: 0.5em;
+    bottom: 1em;
     position: sticky;
   }
   
@@ -169,8 +169,8 @@
     flex-direction: column;
     
     & > h3 {
-      margin: 0 0 0 0.7rem;
-      font-size: 0.7rem;
+      margin: 0 0 0 0.7em;
+      font-size: 0.7em;
       font-weight: lighter;
       color: hsl(0, 0%, 60%);
     }
@@ -184,12 +184,12 @@
   color: white;
   font-size: var(--chat-ui_message_font-size);
   line-height: 1.4;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5em 0.75em;
   margin: 0;
-  border-radius: 0.25rem 1rem 1rem 0.25rem;
+  border-radius: 0.25em 1em 1em 0.25em;
   
   &:first-of-type {
-    border-radius: 1rem 1rem 1rem 0.25rem;
+    border-radius: 1em 1em 1em 0.25em;
   }
   
   &:not(:first-child) {
@@ -200,6 +200,6 @@
 [mine] .chat-message {
   background: var(--chat-ui_message_bg2);
   color: var(--chat-ui_message_text-color);
-  border-radius: 1rem 0.25rem 0.25rem 1rem;
+  border-radius: 1em 0.25em 0.25em 1em;
 }
 </style>
