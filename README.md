@@ -2,6 +2,38 @@
 
 A chatbox client written in Svelte, to be paired with LiveMatrix Server binary
 
+## Installation
+Place the `.css` and `.js` files in the static files hosting directory of your application.
+Attach the `.css` and `.js` files as part of your application. It is a good idea to place the CSS in the head of the application and JS at the end of the body.
+```html
+<head>
+	<link rel="stylesheet" href="/livematrix/livematrix.css">
+</head>
+<body>
+	...
+	<script type="module" src="/livematrix/livematrix.js"></script>
+</body>
+```
+In your application, create a `span` element with id=`livematrix`.
+```
+<span id="livematrix" style="display: contents"></span>
+```
+and we are done!
+
+### Install as svelte component
+Create a `LiveMatrix.svelte` component, as part of your Svelte application.
+_If you have placed the `.js` and `.css` files directly in the `static` directory._
+In this component add lines:
+```
+<svelte:head>
+	<script type="module" src="/livematrix.min.js"></script>
+	<link rel="stylesheet" href="/livematrix.css" />
+</svelte:head>
+
+<span id="livematrix" style="display: contents"></span>
+```
+then import this component to any part of your website and see the chatbox appear!
+
 ## Configuration
 Take the sample config and modify it according to your server configuration.
 
@@ -43,3 +75,10 @@ lm_server.domain.com {
 		header_down Access-Control-Allow-Credentials "true"
 	}
 }
+
+## Building
+To make a standalone application, we can use the command attached to `package.json`
+```
+pnpm run standalone
+```
+which is going to make separate, minified .js and .css files, to be included as part of our website.
