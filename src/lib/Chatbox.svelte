@@ -1,19 +1,19 @@
 <script lang="ts">
 	import { chatState, chatConfig } from '$lib/state.svelte';
 	import { websocketService } from '$lib/websocket.service.js';
+	import { tapOutside } from 'svelte-outside';
 
-    import Header from '$lib/Chatbox/Header.svelte';
+	import Header from '$lib/Chatbox/Header.svelte';
 	import Session from '$lib/Chatbox/Session.svelte';
 	import Messages from '$lib/Chatbox/Messages.svelte';
 
 	// --- PROPS ---
 	// The parent component can control the visibility of the chatbox with this prop.
-	let { open = false } = $props();
 
 	// --- STATE ---
-	let sessionActive = $state(false);
+	let sessionActive: boolean = $state(false);
+	let configLoaded: boolean = $state(false);
 	let userInput = $state('');
-	let isLoadingConfig = $state(true);
 
 	// --- LOGIC & EFFECTS ---
 
@@ -22,65 +22,41 @@
 		// 1. Setup config fetching
 		async function fetchConfig() {
 			try {
-                console.debug("Fetching config.json");
-				const response = await fetch('/config.json');
+				console.debug('Fetching config.json');
+				const response = await fetch('./livematrix/config.json');
 				if (!response.ok) throw new Error('Network response was not ok');
 				const configData = await response.json();
-                console.debug("Received config.json", configData);
+				console.debug('Received config.json', configData);
 				// Assign fetched data to our reactive config object.
 				Object.assign(chatConfig, configData.config);
 			} catch (error) {
 				console.error('Failed to fetch config:', error);
 			} finally {
-				isLoadingConfig = false;
+				configLoaded = true;
 			}
 		}
 
-        // Fetch configuration file once.
-        if (isLoadingConfig && !sessionActive) {
-            fetchConfig();
-        }
-
-		// 2. Check for an existing session cookie.
-		if (document.cookie.includes('session_id')) {
-            // we don't use the session_id for any special identifications, so a boolean is enough
-			sessionActive = true;
+		if (!sessionActive) sessionActive = document.cookie.includes('session_id');
+		if (!configLoaded) {
+			fetchConfig();
+			return;
+		} else if (sessionActive) {
+			websocketService.connect();
+			console.debug('Websocket connecting!');
 		}
-
-        // 3. This effect should manage the WebSocket connection.
-        // It runs when `sessionActive` becomes true.
-        if (sessionActive && !isLoadingConfig) {
-            websocketService.connect();
-            console.debug("Websocket connecting!");
-            return
-        }
-        
-        // 4. If the session gets somehow closed, disconnect!
-        if(!sessionActive) {
+		/* {
             console.debug("Websocket cleanup!");
             websocketService.disconnect();
-        }
+            return
+        } */
 
 		// The cleanup function runs when the component is unmounted
 		// or when the dependencies (`sessionActive`, `isLoadingConfig`) change.
-		return () => {
-
-		};
+		return () => {};
 	});
-
-    // Another $effect to manage the open/closed state
-    $effect(() => {
-        chatState.isChatboxOpen = open;
-        // If the box is opened, clear unread messages.
-        if (open) {
-            chatState.unread = 0;
-        }
-    });
-
 
 	function handleSessionCreated() {
 		sessionActive = true;
-        document.cookie="session_id=true"
 	}
 
 	function handleSendMessage() {
@@ -92,12 +68,17 @@
 	}
 </script>
 
-<!-- The main container's visibility is now controlled by the `open` prop -->
-{#if open}
-	<div class="chat-ui">
+<!-- The main container's visibility is now controlled by the `isChatboxOpen` state -->
+{#if chatState.isChatboxOpen}
+	<div
+		class="chat-ui"
+		use:tapOutside={() => {
+			chatState.isChatboxOpen = false;
+		}}
+	>
 		<Header />
 
-		{#if isLoadingConfig}
+		{#if !configLoaded}
 			<div class="loading-view">
 				<p>Loading configuration...</p>
 			</div>
@@ -118,16 +99,6 @@
 		{/if}
 	</div>
 {/if}
-
-<!-- This is a placeholder for the chat bubble/icon that the user clicks -->
-<!-- The parent would toggle the `open` prop when this is clicked -->
-<button class="chat-toggle-button" onclick={() => {open = !open}}>
-    {#if chatState.unread > 0 && !open}
-        <span class="unread-badge">{chatState.unread}</span>
-    {/if}
-    <!-- Icon placeholder -->
-    <svg viewBox="0 0 24 24" width="32" height="32" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path></svg>
-</button>
 
 <style lang="scss">
 .chat-ui {
