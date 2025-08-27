@@ -82,8 +82,9 @@
 		}}
 	>
 		<fieldset disabled={isLoading}>
-			<legend>Start a new chat</legend>
-			<p>Please fill in your details to begin.</p>
+			<legend>Welcome to {chatConfig.metadata.companyName}</legend>
+			<p>If you want to inquire about our services or have a chat with our administrators, you are in the right place</p>
+			<p style="font-size:smaller; opacity: 50%;">We ask for extra id, to contact you if we lose communication. <br>The chat is persistent between browser sessions, so you can come back here at any time, to continue our conversation.</p>
 
 			<div class="form-input">
 				<input
@@ -94,7 +95,7 @@
 					bind:value={postData.name}
 					required
 				/>
-				<label for="name">Your Name</label>
+				<label for="name">Your Name*</label>
 			</div>
 
 			<div class="form-input">
@@ -105,7 +106,7 @@
 					placeholder=""
 					bind:value={postData.surname}
 				/>
-				<label for="surname">Phone Number*</label>
+				<label for="surname">Phone Number</label>
 			</div>
 
 			<div class="form-input">
@@ -117,7 +118,7 @@
 					placeholder=""
 					required
 				/>
-				<label for="email">E-mail address</label>
+				<label for="email">E-mail address*</label>
 			</div>
 
 			<button class="button-82-pushable" type="submit" aria-busy={isLoading}>

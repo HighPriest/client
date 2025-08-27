@@ -66,12 +66,12 @@
 				<div class="chat-cluster">
 					<div class="chat-avatar">
 						<img
-							src="https://cdn.dribbble.com/users/37530/screenshots/2937858/drib_blink_bot.gif"
-							alt="Bot Avatar"
+							src="{chatConfig.metadata.companyLogo}"
+							alt="Your partner"
 						/>
 					</div>
 					<section>
-						<h3>Snap Bot</h3>
+						<h3>{chatConfig.metadata.companyName} administrator</h3>
 						<!-- The nested loop renders each message in the cluster -->
 						{#each cluster.messages as body}
 							<div class="chat-message">{body}</div>

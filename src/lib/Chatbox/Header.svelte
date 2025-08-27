@@ -1,12 +1,12 @@
 <!-- Copyright (C) 2025 LiveMatrix -->
 <script lang="ts">
-    // TODO: Make Title and logo loadable from config
+  import { chatConfig } from '$lib/state.svelte';
 </script>
 
 <div class="chat-titlebar">
-<h5>Chat UI</h5>
+<h5>Chat with {chatConfig.metadata.companyName}</h5>
 <div class="chat-avatar">
-    <img src="https://cdn.dribbble.com/users/37530/screenshots/2937858/drib_blink_bot.gif" alt="">
+    <img src="{chatConfig.metadata.companyLogo}" alt="">
 </div>
 </div>
 

@@ -13,7 +13,11 @@ export type Config = {
         host: string,
         port: number
     },
-    greeting: string
+    greeting: string,
+    metadata: {
+        companyName: string,
+        companyLogo: string,
+    }
 }
 
 export const chatState = $state({
