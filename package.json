@@ -3,7 +3,7 @@
 	"version": "0.2.2",
 	"license": "MIT",
 	"scripts": {
-		"standalone": "pnpm exec standalone build --production --all --no-injectAssets --target dist",
+		"standalone": "pnpm exec standalone build --all --no-injectAssets --target dist",
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
 		"preview": "vite preview",

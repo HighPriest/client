@@ -1,15 +1,7 @@
 # TODO
-> Completed tasks should be pushed in description of a commit
-## Fixes
-- [ ] Make the styling work correctly.
-    - [ ] Fix font & its color
-- [ ] Make the app embedable into a user defined container 
-    - [ ] Allow user to adjust positioning of the UI
-    - [ ] Allow user to adjust scaling of the UI
-- [ ] Configurable branding
-    - [ ] Configurable logo
-    - [ ] Configurable Username
-- [x] Make the bubble disappear when (catState.isChatboxOpen) ✅ v0.2.3
+- [ ] Make sure the development process works in localhost through bundling with the server project
+- When svelte-standalone fixes the [Hone CSS Purging](https://github.com/brenoliradev/svelte-standalone/issues/67) issue
+    - [ ] Enable "--production" flag in "pnpm run standalone"
 
 ## Features
 - [ ] Close UI with ESC
