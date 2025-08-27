@@ -37,6 +37,9 @@ then import this component to any part of your website and see the chatbox appea
 ## Configuration
 Take the sample config and modify it according to your server configuration.
 
+### Greetings
+The speech bubble being shown at the page load, can be disabled by clearing the `greetings.bubble` line from config.json
+
 ### Proto(col)
 For prot(col) you really have two options, either `http`, or `https`, depending on your server configuration.
 The same goes for websocket proto(col). If the LiveMatrix Server instance is behind a reverse_proxy, you are going to want to use `wss`, or `ws` when both the JS application and LiveMatrix server, run on the same, local, development machine.

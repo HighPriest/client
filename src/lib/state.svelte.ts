@@ -19,7 +19,10 @@ export type Config = {
         host: string,
         port: number
     },
-    greeting: string,
+    greetings: {
+        bubble: string,
+        message: string
+    }
     metadata: {
         companyName: string,
         companyLogo: string,

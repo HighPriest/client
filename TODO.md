@@ -7,5 +7,3 @@
 - [ ] Close UI with ESC
 - [ ] Notifications worker for new messages
 - [ ] Make a smooth transition between bubble and chatbox view
-- [ ] Call to action bubble, pointing that the Chat here is available
-- [x] Implement messages clustering

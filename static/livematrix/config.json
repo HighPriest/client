@@ -10,7 +10,10 @@
             "host": "localhost", 
             "port": 8000
         },
-        "greeting": "Hello there, thanks for reaching out, i'll answer you asap",
+        "greetings": {
+            "bubble": "Questions?",
+            "message": "Hello there, thanks for reaching out, i'll answer you asap"
+        },
         "metadata": {
             "companyName": "LiveMatrix",
             "companyLogo": "/livematrix/logo.png"
