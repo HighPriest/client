@@ -85,7 +85,7 @@
 		<fieldset disabled={isLoading}>
 			<legend>Welcome to {chatConfig.metadata.companyName}</legend>
 			<p>If you want to inquire about our services or have a chat with our administrators, you are in the right place</p>
-			<p style="font-size:smaller; opacity: 50%;">We ask for extra id, to contact you if we lose communication. <br>The chat is persistent between browser sessions, so you can come back here at any time, to continue our conversation.</p>
+			<p style="font-size:smaller; opacity: 80%;">We ask for extra id, to contact you if we lose communication. <br>The chat is persistent between browser sessions, so you can come back here at any time, to continue our conversation.</p>
 
 			<div class="form-input">
 				<input
@@ -159,7 +159,7 @@
 				border-radius: 1em;
 				position: relative;
 				margin-top: -0.3em;
-				background: hsl(0deg 0% 0% / 0.8);
+				background: linear-gradient(var(--chat-ui_theme), 80%, hotpink);
 				legend {
 					font-weight: bold;
 					font-size: 1.2em;
@@ -285,7 +285,7 @@
 					}
 					&:valid {
 						~ label {
-							color: gray;
+							color: var(--chat-ui_theme_text-color);
 						}
 					}
 				}
@@ -295,7 +295,7 @@
 					left: 0;
 					padding: 10px 0;
 					font-size: 16px;
-					color: gray;
+					//color: var;
 					pointer-events: none;
 					transition: 0.5s;
 				}

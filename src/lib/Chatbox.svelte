@@ -168,7 +168,7 @@
 		padding: 0.5em 0.75em;
 		border-radius: 1em 1em 2px;
 		box-shadow: 0.25rem 0.5rem 1rem hsla(0, 0%, 0%, 0.2);
-		background: white;
+		background: var(--chat-ui_bg);
 		caret-color: var(--chat-ui_theme, blue);
 		font-size: 0.9em;
 		font-weight: lighter;
