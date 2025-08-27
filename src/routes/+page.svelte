@@ -1,5 +1,7 @@
 <script lang="ts">
-    import App from "$lib/App.svelte";
+    import Bubble from "$lib/Bubble.svelte";
+    import Chatbox from "$lib/Chatbox.svelte";
 </script>
 
-<App />
+<Bubble/>
+<Chatbox/>
