@@ -2,7 +2,7 @@
 
 A chatbox client written in Svelte, to be paired with LiveMatrix Server binary
 
-## Installation
+## Using in production
 Place the `.css` and `.js` files in the static files hosting directory of your application.
 Attach the `.css` and `.js` files as part of your application. It is a good idea to place the CSS in the head of the application and JS at the end of the body.
 ```html
@@ -75,8 +75,11 @@ lm_server.domain.com {
 		header_down Access-Control-Allow-Credentials "true"
 	}
 }
+```
 
-## Building
+## Development
+> Follow contents of [[CONTRIBUTING.md]] for details
+
 To make a standalone application, we can use the command attached to `package.json`
 ```
 pnpm run standalone
