@@ -1,3 +1,4 @@
+<!-- Copyright (C) 2025 LiveMatrix -->
 <script lang="ts">
 	// Import the configuration
 	import { chatConfig } from '$lib/state.svelte';

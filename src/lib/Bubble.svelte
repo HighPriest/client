@@ -1,3 +1,4 @@
+<!-- Copyright (C) 2025 LiveMatrix -->
 <script lang="ts">
 	import { chatState } from '$lib/state.svelte';
 

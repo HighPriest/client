@@ -1,3 +1,4 @@
+<!-- Copyright (C) 2025 LiveMatrix -->
 <script lang="ts">
 	import { chatState, chatConfig } from '$lib/state.svelte';
 	import { websocketService } from '$lib/websocket.service.js';

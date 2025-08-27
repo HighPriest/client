@@ -1,3 +1,4 @@
+<!-- Copyright (C) 2025 LiveMatrix -->
 <script lang="ts">
     // TODO: Make Title and logo loadable from config
 </script>

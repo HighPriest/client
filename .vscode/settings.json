@@ -1,0 +1,6 @@
+{
+    "search.exclude": {
+        "LICENSE": true,
+        "pnpm-lock.yaml": true
+    }
+}
