@@ -1,6 +1,6 @@
 {
 	"name": "livematrix-client",
-	"version": "0.2.2",
+	"version": "0.2.5",
 	"license": "MIT",
 	"scripts": {
 		"standalone": "pnpm exec standalone build --all --no-injectAssets --target dist",

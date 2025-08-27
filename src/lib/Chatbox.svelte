@@ -37,11 +37,11 @@
 			}
 		}
 
-		if (!sessionActive) sessionActive = document.cookie.includes('session_id');
+		if (!sessionActive) sessionActive = document.cookie.includes('session_id'); // If session not created, check if we have session_id stored
 		if (!configLoaded) {
 			fetchConfig();
 			return;
-		} else if (sessionActive) {
+		} else if (sessionActive) {	// If session_id had been received or session_id had been stored. Connect!
 			websocketService.connect();
 			console.debug('Websocket connecting!');
 		}

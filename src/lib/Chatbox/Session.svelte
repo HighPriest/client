@@ -2,14 +2,15 @@
 <script lang="ts">
 	// Import the configuration
 	import { chatConfig } from '$lib/state.svelte';
+	import type { UserMetadata } from '$lib/state.svelte';
 
 	// --- PROPS ---
 	let { onSessionCreated = () => {} } = $props();
 
 	// --- STATE ---
-	let postData = $state({
+	let userMetadata: UserMetadata  = $state({
 		name: '',
-		surname: '',
+		phone: '',
 		email: ''
 	});
 
@@ -25,7 +26,7 @@
 		errorMessage = '';
 
 		// Simple validation
-		if (!postData.name || !postData.email) {
+		if (!userMetadata.name || !userMetadata.email) {
 			errorMessage = 'Name and email are required.';
 			isLoading = false;
 			return;
@@ -37,7 +38,7 @@
 			port && port !== 0 ? `${proto}://${host}:${port}/session` : `${proto}://${host}/session`;
 
 		// Create the request body.
-		const formBody = Object.entries(postData)
+		const formBody = Object.entries(userMetadata)
 			.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
 			.join('&');
 
@@ -56,7 +57,7 @@
 			// With 'no-cors', the status will be 0 on success.
 			if (response.status === 0) {
 				// Call the function prop to notify the parent component.
-				onSessionCreated();
+				onSessionCreated(userMetadata);
 			} else {
 				// We can't get detailed error info in 'no-cors' mode.
 				throw new Error('Network response was not OK. Check server CORS policy.');
@@ -92,7 +93,7 @@
 					id="name"
 					name="name"
 					placeholder=""
-					bind:value={postData.name}
+					bind:value={userMetadata.name}
 					required
 				/>
 				<label for="name">Your Name*</label>
@@ -101,10 +102,10 @@
 			<div class="form-input">
 				<input
 					type="text"
-					id="surname"
-					name="surname"
+					id="phone"
+					name="phone"
 					placeholder=""
-					bind:value={postData.surname}
+					bind:value={userMetadata.phone}
 				/>
 				<label for="surname">Phone Number</label>
 			</div>
@@ -114,7 +115,7 @@
 					type="email"
 					id="email"
 					name="email"
-					bind:value={postData.email}
+					bind:value={userMetadata.email}
 					placeholder=""
 					required
 				/>

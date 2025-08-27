@@ -1,3 +1,9 @@
+export type UserMetadata = {
+    name: string,
+    phone: string,
+    email: string
+    // If this ever gets changed, remember to update handleSessionCreated in Chatbox.svelte
+}
 export type Message = {
     author: string,
     body: string

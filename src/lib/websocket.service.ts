@@ -23,7 +23,7 @@ function connect() {
 
 	ws.onopen = () => {
 		console.debug('WebSocket connection established.');
-		// Send initial greeting from the bot upon connection
+		// Send initial greeting to the user upon connection
 		if (chatConfig.greeting) {
 			chatState.messenger.push({ author: "0", body: chatConfig.greeting });
 		}
