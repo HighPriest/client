@@ -142,6 +142,7 @@
 		font-weight: bold;
 	}
 	.thought-bubble {
+		color: black;
 		position: fixed;
 		bottom: 4em;
 		right: 1em;
