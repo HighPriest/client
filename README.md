@@ -2,6 +2,9 @@
 
 A chatbox client written in Svelte, to be paired with LiveMatrix Server binary
 
+<img width="780" height="638" alt="image" src="https://github.com/user-attachments/assets/3f5a6496-b1b6-4e6c-a9f6-dd0be708f32a" />
+
+
 ## Using in production
 Place the `.css` and `.js` files in the static files hosting directory of your application.
 Attach the `.css` and `.js` files as part of your application. It is a good idea to place the CSS in the head of the application and JS at the end of the body.
